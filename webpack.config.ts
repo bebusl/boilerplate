@@ -8,12 +8,12 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
 const config: Configuration = {
-  mode: isDevelopment ? 'development' : 'production',
+  mode: 'development',
   devtool: !isDevelopment ? 'hidden-source-map' : 'eval',
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
   },
-  entry: './src/index.ts',
+  entry: path.resolve(__dirname, 'src/index.ts'),
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
@@ -56,9 +56,6 @@ const config: Configuration = {
   plugins: [
     new ForkTsCheckerWebpackPlugin({
       async: false,
-      // eslint: {
-      //   files: "./src/**/*",
-      // },
     }),
     new webpack.EnvironmentPlugin({ NODE_ENV: isDevelopment ? 'development' : 'production' }),
   ],
